@@ -1,0 +1,138 @@
+---
+title: "R_PROJECT"
+author: "DATA FRAMES"
+date: "2024-04-18"
+output: 
+    prettydoc::html_pretty:
+     themes: leonids
+---
+**DATA FRAME QUESTION**
+```{r }
+library(dplyr)
+```
+
+
+1.Create a data frame named df_students with the following columns: ID, Name, Age, and Grade. Populate it with data for 5 students. Perform the following operations:
+
+```{r}
+df_students =data.frame(ID = c(1,2,3,4,5),
+                       Name= c('sun','moon','earth','mars','jupter') ,
+                        Age= c(23,24,17,18,20),
+                        Grade = c('90','80','50','60','40')
+                        )
+df_students
+```
+
+
+1.1.Add a new column Passed that indicates with TRUE or FALSE whether each student passed (assume a passing grade is at least 60).
+```{r}
+df_stud = mutate(df_students,Passed = Grade >= 60)
+df_stud
+```
+
+
+1.2.Select and print only the rows of students who are 18 years or older.
+```{r}
+dt=select(filter(df_students,Age>=18),'ID','Name','Age','Grade')
+dt
+```
+
+2.Suppose you have two data frames, df_A and df_B. df_A contains student IDs and names, while df_B contains student IDs and their corresponding courses. Write R code to merge these data frames so each row contains a student’s ID, name, and course.
+```{r}
+df_A =data.frame(stud_id = c(1:5),
+                 name = c('alice','peter','john','ferry','jenny'))
+df_A
+```
+
+```{r}
+df_B =data.frame(stud_id = c(1:5),
+                 courses = c('maths','english','physis','chemistry','computer'))
+df_B
+```
+
+```{r}
+new_df =merge(df_A,df_B,by ='stud_id')
+new_df
+```
+3.Given a data frame df_sales with columns Date, ProductID, Quantity, and Price, write R code to calculate the total sales (Quantity * Price) for each product.
+
+ 1.Note: Generate your own data set.
+```{r}
+
+df_sales = data.frame(Date =c('2024-01-10','2024-01-20','2024-02-15','2024-02-25','2024-03-30'),
+                      ProductID = c(1:5),
+                      Quantity = c(10,20,30,40,50),
+                      Price = c(1000,1500,2000,2500,3000))
+df_sales
+```
+```{r}
+df_sales %>%
+  group_by(ProductID) %>%
+  summarise(total_sales = sum(Quantity * Price))
+```
+
+**4.For iris data set.**
+
+4.1.Calculate the average Sepal.Length for each Species.
+
+```{r}
+data(iris)
+head(iris)
+```
+
+```{r}
+data =aggregate(Sepal.Length ~ Species,iris,mean)
+data
+```
+
+4.2.Create a new column Sepal.Area which is the product of Sepal.Length and Sepal.Width.
+```{r}
+new =mutate(iris,Sepal_Area = iris$Sepal.Length *iris$Sepal.Width)
+new
+```
+
+4.3.Find the species with the highest average Sepal.Area.
+```{r}
+iris %>%
+  mutate(Sepal.Area = Sepal.Length * Sepal.Width) %>%
+  group_by(Species) %>%
+  summarise(mean_Sepal_Area = mean(Sepal.Area)) %>%
+  arrange(desc(mean_Sepal_Area)) %>%
+  head(1)
+```
+
+**5.For airquality data set.**
+```{r}
+data(airquality)
+head(airquality)
+```
+
+```{r}
+names(airquality)
+```
+
+5.1.Calculate the average Ozone level for each month, excluding missing values.
+```{r}
+a= airquality %>%
+    group_by(Month) %>%
+    summarise(ozone_mean_data = mean(Ozone,na.rm = TRUE))
+a
+```
+
+5.2.Determine the month with the highest average Ozone level.
+```{r}
+airquality %>%
+group_by(Month) %>%
+summarise(ozone_mean_data = mean(Ozone,na.rm = TRUE)) %>%
+arrange(desc(ozone_mean_data)) %>%
+head(1)
+```
+
+5.3.Create a new data frame with Month and Temp columns, excluding days with missing Ozone values.
+```{r}
+air = select(filter(airquality, !is.na(Ozone)), Month, Temp)
+air
+```
+
+
+

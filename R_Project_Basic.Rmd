@@ -1,0 +1,161 @@
+---
+title: "R_PROJECT"
+author: "BASIC QUESTION"
+date: "2024-04-18"
+output: 
+     prettydoc::html_pretty:
+     themes: leonids
+---
+**Basic questions**
+
+
+1.Create a vector called stock.prices with the following data points:
+   23,27,23,21,34.
+```{r}
+stock_prices = c(23,27,23,21,34)
+stock_prices
+```
+
+2.Create a numeric vector containing the numbers 1 to 10.
+```{r}
+numeric_vector = 1:10
+numeric_vector
+```
+
+3.Calculate the sum of these numbers.
+```{r}
+sum(numeric_vector)
+```
+
+4.Create a logical vector indicating which numbers are even
+```{r}
+logical_vector = numeric_vector %% 2 == 0
+logical_vector
+```
+
+5.Use the plot() function to create a scatter plot of the mtcars dataset, plotting mpg (miles per gallon) against hp (horsepower).
+```{r}
+library(ggplot2)
+```
+
+```{r}
+data(mtcars)
+head(mtcars)
+```
+
+```{r}
+
+plot(mtcars$mpg,mtcars$hp,xlab = "MPG",ylab= "Hp",col="red",pch = 20,
+     main = "Distribution of miles per gallon against horsepower")
+```
+
+6.Given a vector a = c("a", "b", "c", "d", "e"), extract the 2nd and 4th elements.
+
+```{r}
+ a = c("a", "b", "c", "d", "e")
+ a
+ a[c(2,4)]
+```
+7.From the mtcars dataset, select the rows where cyl (cylinders) is 4 and only the columns mpg, hp, and wt.
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+mtcars_data = select(filter(mtcars,cyl==4),'cyl','mpg','hp','wt')
+mtcars_data
+```
+8.Create a list my_list that contains three elements: a numeric vector (1, 2, 3), a character vector (“a”, “b”, “c”), and a matrix with 2 rows and 2 columns.
+```{r}
+my_list = list(c(1,2,3),c('a','b','c'),matrix(1:4,nrow=2))
+my_list
+```
+
+9.Add a new element to my_list that is a logical vector (TRUE, FALSE).
+```{r}
+my_list = c(my_list,'true','false')
+my_list
+```
+
+10.Create character vector words with the elements “R”, “is”, “fun”.
+```{r}
+words = c('R','is','Fun')
+words
+```
+
+11.Use a function to concatenate these words into a single string: “R is fun”.
+
+```{r}
+a = cat(words,"")
+
+```
+12.Replace “fun” with “awesome” in the concatenated string.
+
+```{r}
+a = 'r is fun'
+b = gsub( 'fun','awsome',a)
+b
+```
+13.From a numeric vector to a character vector: v_num = c(1, 2, 3)
+```{r}
+v_num = c(1, 2, 3)
+typeof(v_num)
+v_char = as.character(v_num)
+v_char
+typeof(v_char)
+```
+14.From a character vector to a factor: v_char = c("low", "medium", "high")
+```{r}
+v_char1 = c("low", "medium", "high")
+c=as.factor(v_char1)
+c
+typeof(c)
+```
+15.From a factor to a numeric vector, considering the factor levels as numeric values: f = factor(c(1, 2, 3)).
+```{r}
+f = factor(c(1, 2, 3))
+n= as.numeric(f)
+n
+typeof(n)
+```
+16.colors = c(“red”, “blue”, “green”, “blue”, “red”, “green”, “green”, “red”)
+
+  1.Convert colors into a factor, f_colors.
+```{r}
+colors = c('red', 'blue', 'green', 'blue', 'red', 'green', 'green', 'red')
+f_colors =factor(colors)
+f_colors
+```
+  2.Print the levels of f_colors.
+```{r}
+f_colors
+levels(f_colors)
+```
+ 3.How would you reorder the levels of f_colors so that “green” comes first?
+```{r}
+colors = c('red', 'blue', 'green', 'blue', 'red', 'green', 'green', 'red')
+f_colors =factor(colors,levels=c('green','blue','red'))
+f_colors
+```
+17.my_list <- list(name = “Alice”, age = 30, hobbies = c(“Cycling”, “Art”, “Music”)) my_df <- data.frame(Name = c(“Alice”, “Bob”), Age = c(25, 30))
+
+ 1.Access and print the hobbies element from my_list.
+```{r}
+my_list = list(name = 'Alice', age = 30,
+               hobbies = c('Cycling', 'Art', 'Music'))
+my_list[[3]]
+```
+
+ 2.Add a new column Occupation to my_df with values “Doctor” for Alice and “Engineer” for Bob.
+
+```{r}
+my_df = data.frame(Name = c('Alice', 'Bob'), Age = c(25, 30))
+my_df = cbind(my_df,Occupation =c('doctor','Engineer'))
+my_df
+```
+
+ 
+ 
+ 
+ 

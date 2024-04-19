@@ -1,0 +1,68 @@
+---
+title: "R_PROJECT"
+author: "Matrix"
+date: "2024-04-18"
+output: 
+      prettydoc::html_pretty:
+         themes: leonids
+---
+**Matrix Question**
+
+IF
+B = matrix(c(1, 2, 3, 4), nrow=2)
+C = matrix(c(2, 0, 1, 2), nrow=2)
+A = matrix(1:9, nrow=3)
+```{r}
+B = matrix(c(1, 2, 3, 4), nrow=2)
+C = matrix(c(2, 0, 1, 2), nrow=2)
+A = matrix(1:9, nrow=3)
+A
+B
+C
+```
+
+1.The sum of B and C.
+```{r}
+B = matrix(c(1, 2, 3, 4), nrow=2)
+
+C = matrix(c(2, 0, 1, 2), nrow=2)
+
+result =B +C
+result
+```
+
+2.The product of B and C (matrix multiplication)
+```{r}
+B = matrix(c(1, 2, 3, 4), nrow=2)
+
+C = matrix(c(2, 0, 1, 2), nrow=2)
+multi =B * C
+multi
+```
+
+3.Calculate the sum of each row in A.
+```{r}
+A = matrix(1:9, nrow=3)
+A
+ a = rowSums(A)
+ a
+```
+4.Calculate the mean value of each column in A.
+```{r}
+A = matrix(1:9, nrow=3)
+A
+b = colMeans(A)
+b
+```
+
+5.set all the elements to 0 if it is div by 2
+```{r}
+A = matrix(1:9, nrow=3)
+A[A %% 2 == 0] =  0
+A
+
+```
+
+
+
+

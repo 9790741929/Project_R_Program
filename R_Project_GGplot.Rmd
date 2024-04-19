@@ -1,0 +1,128 @@
+---
+title: "R_PROJECT"
+author: "GGPLOT"
+date: "2024-04-18"
+output: 
+   prettydoc::html_pretty:
+     themes: leonids
+       
+---
+**GGPLOT Questions**
+
+**USE mtcars default data**
+
+1.Histogram of hwy mpg values.
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+data(mtcars)
+head(mtcars)
+```
+```{r}
+
+
+ggplot(mtcars,aes (x = mpg) ) + geom_histogram(color="darkblue",
+            fill="lightblue")
+```
+
+2.Barplot of car counts per manufacturer with color fill defined by cyl count.
+
+```{r}
+a = row.names(mtcars)
+a
+```
+
+```{r}
+ggplot(mtcars,aes(x=a,fill =cyl))+geom_bar()+ theme(axis.text.x = element_text(face="bold", color="#993333", size=14, angle=90))
+```
+
+3.Switch now to use the txhousing dataset that comes with ggplot2.
+
+```{r}
+
+data( txhousing )
+ head(txhousing)
+```
+
+4.Create a scatterplot of volume versus sales. Afterwards play around with alpha and color arguments to clarify information.
+
+```{r}
+
+x =txhousing$volume
+y =txhousing$sales
+plot(x,y, xlab ='volume',ylab ='sales',main ='scatterplot of volume Vs sales',col ='purple',pch =20 )+geom_point(alpha=0.6)
+```
+
+5.Add a smooth fit line to the scatterplot from above. Hint: You may need to look up geom_smooth().
+```{r}
+
+ggplot(txhousing, aes(x =volume,y = sales,na.rm = TRUE))+geom_point(col =' purple',
+alpha=0.6,na.rm = TRUE)+ggtitle("Scatterplot of volume Vs sales")+
+  theme(plot.title = element_text(size =rel(2.0),face="bold",hjust =0.5,color ='red'))+geom_smooth(na.rm = TRUE)
+```
+
+**USE airquality default data**
+
+1.The x-axis represents the Day of the month.
+
+2.The y-axis represents the Ozone levels.
+
+3.Color the points by Month.
+
+4.Add a smooth trend line to the plot.
+```{r}
+data(airquality)
+head(airquality)
+```
+
+```{r}
+
+ggplot(airquality, aes(x=Ozone, y=Day,fill =factor(Month),na.rm =TRUE))+geom_smooth(method = 'loess',na.rm =TRUE,formula = 'y ~ x')
+```
+
+**USE checkweight default data**
+
+1.Plots Time on the x-axis and weight on the y-axis.
+
+2.Uses different colors to represent each Diet.
+
+3.Groups the lines by Chick to show individual growth trajectories within each diet.
+```{r}
+
+data(ChickWeight)
+head(ChickWeight)
+```
+```{r}
+
+ggplot(ChickWeight, aes(x =Time,y =weight,colour=Diet, group=Chick))+geom_line()
+```
+
+**USE diamonds default data**
+
+Create a histogram to show the distribution of carat sizes. Then, refine your plot by:
+
+1.Filling the bars based on the cut quality of the diamonds.
+
+2.Limiting the x-axis to diamonds up to 3 carats for better detail.
+
+```{r}
+
+data(diamonds)
+
+```
+```{r}
+
+head (diamonds)
+```
+
+```{r}
+
+ggplot(diamonds, aes(x =carat ,fill = cut,na.rm =TRUE))+geom_histogram(bins = 10,na.rm =TRUE)+ xlim(0, 3)
+```
+
+
+
+

@@ -1,0 +1,59 @@
+---
+title: "R_PROJECT"
+author: "DPLYR"
+date: "2024-04-18"
+output: 
+    prettydoc::html_pretty:
+     themes: leonids
+---
+**DPLYR Questions**
+
+1.Return rows of cars that have an mpg value greater than 20 and 6 cylinders.
+```{r}
+library(dplyr)
+```
+
+```{r}
+data(mtcars)
+head(mtcars)
+```
+
+```{r}
+cars =select(filter(mtcars,mpg>20,cyl==6),'mpg','cyl')
+cars
+```
+
+2.Reorder the Data Frame by cyl first, then by descending wt.
+```{r}
+mtcars %>%
+  arrange(cyl, desc(wt))
+```
+
+3.Select only the columns mpg and hp.
+```{r}
+select(mtcars,'mpg','hp')
+```
+
+4.Select the distinct values of the gear column.
+```{r}
+distinct(select(mtcars,gear))
+```
+
+5.Create a new column called “Performance” which is calculated by hp divided by wt.
+```{r}
+car =mutate(mtcars,Performance = hp / wt)
+car
+```
+
+6.Find the mean mpg value using dplyr.
+```{r}
+summarise(mtcars,mean_mpg =mean(mpg))
+```
+
+7.Use pipe operators to get the mean hp value for cars with 6 cylinders.
+```{r}
+mtcars %>%
+filter(cyl==6)  %>%
+ summarise(mean_hp =mean(hp))
+```
+

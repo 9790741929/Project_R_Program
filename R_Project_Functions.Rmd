@@ -1,0 +1,118 @@
+---
+title: "R_PROJECT"
+author: "FUNCTIONS"
+date: "2024-04-18"
+output: 
+      prettydoc::html_pretty:
+         themes: cayman
+---
+**Functions** **Question**
+
+1.Create a function that takes in a name as a string argument, and prints out “Hello name”.
+```{r}
+my_fun =function(a){
+cat ('hello',a)
+  cat('',sep='\n')
+}
+my_fun('magesh')
+```
+
+2.Create a function that takes in a name as a string argument and returns a string of the form - “Hello name”.
+```{r}
+my_fun = function(name) {
+  paste('Hello', name)
+
+}
+my_fun('John')
+```
+
+3.Create a function that will return the product of two integers.
+```{r}
+my_fun <- function(a,b) {
+  print(a*b)
+
+}
+my_fun(3,7)
+```
+
+4.Create a function to check the count of numbers
+Ex. x = c(1,1,1,2,2,2,3,12,3,4,5,3) output should be how many times each element is present in the vector.
+
+```{r}
+x =c(1,1,1,2,2,2,3,12,3,4,5,3)
+my_fun = function(x){
+print(table(x))
+}
+my_fun(x)
+```
+
+5.Create a function categorize_age that takes an age (numeric value) as input and returns “Child” if the age is less than 18, “Adult” if the age is between 18 and 64, inclusive, and “Senior” if the age is 65 or above.
+```{r}
+age=readline()
+categorize_age = function(age){
+
+if(age <18){
+  print("child")
+}else{
+  if(age>18 & age<64){
+    print("Adult")
+  }else{
+    if(age>65){
+      print("senior")
+    }
+  }
+}
+}
+categorize_age(age)
+```
+
+
+6.Write a function average_salary_by_age_group that takes a data frame with columns Age and Salary and returns a new data frame with two columns, AgeGroup and AverageSalary, where AgeGroup is “Young” (ages below 30), “Middle” (ages 30 to 50), and “Senior” (ages above 50), and AverageSalary is the average salary for each age group.
+```{r}
+library (dplyr)
+```
+
+```{r}
+df= data.frame(Age = c(25, 32, 45, 55, 62),
+                 Salary = c(50000, 60000, 70000, 80000, 90000))
+df
+```
+
+```{r}
+average_salary_by_age_group = function(df) {
+  df %>%
+    mutate(AgeGroup = case_when( Age < 30 ~ "Young",
+                                 Age >= 30 & Age <= 50 ~ "Middle",
+                                 Age > 50 ~ "Senior")) %>%
+    group_by(AgeGroup) %>%
+    summarise(AverageSalary = mean(Salary))
+}
+average_salary_by_age_group(df)
+```
+
+7.Given a data frame df with columns Length and Width representing dimensions of rectangles, write a function area_rectangle that calculates the area of each rectangle. Then, use apply(), lapply(), or sapply() to apply this function to df to add a new column Area to the data frame.
+```{r}
+
+df  = data.frame(length = c(24,35,36,20,10),
+                 width = c(3,4,6,8,9))
+df
+```
+
+```{r}
+area_rectangle =function(df){
+  l = df['length']
+  b = df['width']
+  print(l*b)
+}
+area_rectangle(df)
+
+```
+
+**apply function**
+```{r}
+df['Area'] = apply(df,1,area_rectangle)
+df
+```
+
+
+
